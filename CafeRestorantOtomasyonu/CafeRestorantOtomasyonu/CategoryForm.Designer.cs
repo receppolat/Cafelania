@@ -49,7 +49,7 @@
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Location = new System.Drawing.Point(570, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(32, 28);
             this.button1.TabIndex = 9;
@@ -66,9 +66,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.listView1);
             this.groupBox1.Location = new System.Drawing.Point(16, 44);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(250, 312);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
@@ -76,7 +76,7 @@
             // btnduzenle
             // 
             this.btnduzenle.Location = new System.Drawing.Point(167, 47);
-            this.btnduzenle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnduzenle.Margin = new System.Windows.Forms.Padding(2);
             this.btnduzenle.Name = "btnduzenle";
             this.btnduzenle.Size = new System.Drawing.Size(66, 29);
             this.btnduzenle.TabIndex = 16;
@@ -87,7 +87,7 @@
             // btnsil
             // 
             this.btnsil.Location = new System.Drawing.Point(92, 47);
-            this.btnsil.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnsil.Margin = new System.Windows.Forms.Padding(2);
             this.btnsil.Name = "btnsil";
             this.btnsil.Size = new System.Drawing.Size(66, 29);
             this.btnsil.TabIndex = 15;
@@ -98,7 +98,7 @@
             // btnekle
             // 
             this.btnekle.Location = new System.Drawing.Point(14, 47);
-            this.btnekle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnekle.Margin = new System.Windows.Forms.Padding(2);
             this.btnekle.Name = "btnekle";
             this.btnekle.Size = new System.Drawing.Size(66, 29);
             this.btnekle.TabIndex = 14;
@@ -109,10 +109,11 @@
             // tbadi
             // 
             this.tbadi.Location = new System.Drawing.Point(60, 20);
-            this.tbadi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbadi.Margin = new System.Windows.Forms.Padding(2);
             this.tbadi.Name = "tbadi";
             this.tbadi.Size = new System.Drawing.Size(173, 20);
             this.tbadi.TabIndex = 13;
+            this.tbadi.TextChanged += new System.EventHandler(this.tbadi_TextChanged);
             // 
             // label2
             // 
@@ -133,7 +134,7 @@
             this.columnHeader2});
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(14, 81);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listView1.Margin = new System.Windows.Forms.Padding(2);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(220, 219);
             this.listView1.TabIndex = 0;
@@ -173,7 +174,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CategoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.CategoryForm_Load);

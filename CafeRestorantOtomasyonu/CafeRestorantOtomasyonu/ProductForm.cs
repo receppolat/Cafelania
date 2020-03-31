@@ -92,9 +92,10 @@ namespace CafeRestorantOtomasyonu
             }
 
         }
-
+        string urunAdi = "";
         private void btnduzenle_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 if (satir == -1)
@@ -106,12 +107,13 @@ namespace CafeRestorantOtomasyonu
                         using (var cafeContext = new CafeContext())
                         {
                             var resultProduct = from products in cafeContext.Products
-                                                where products.ProductName.ToLower() == tbadi.Text.ToLower()
+                                                where products.ProductName.ToLower() == tbadi.Text.ToLower() 
                                                 select products;
-                            if (resultProduct.Count() == 0)
+
+                            if (resultProduct.Count() == 0 || urunAdi.ToLower() == tbadi.Text.ToLower())
                             {
-                                var result = from categoryId in cafeContext.Categories
-                                             where categoryId.CategoryName == cbtur.Text
+                                     var result = from categoryId in cafeContext.Categories
+                                             where categoryId.CategoryName == cbtur.Text 
                                              select categoryId.CategoryID;
                                 int id = result.FirstOrDefault();
                                 Product product = cafeContext.Products.Find(satir);
@@ -145,7 +147,7 @@ namespace CafeRestorantOtomasyonu
             try
             {
                 satir = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
-                tbadi.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                urunAdi =  tbadi.Text = listView1.SelectedItems[0].SubItems[1].Text;
                 tbfiyat.Text = listView1.SelectedItems[0].SubItems[3].Text;
                 cbtur.Text = listView1.SelectedItems[0].SubItems[2].Text;
             }
@@ -167,7 +169,7 @@ namespace CafeRestorantOtomasyonu
             }
             catch
             {
-                MessageBox.Show("Silmek için lütfen seçim yapınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               MessageBox.Show("Silmek için lütfen seçim yapınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -207,6 +209,11 @@ namespace CafeRestorantOtomasyonu
         private void btncikis_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void tbadi_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

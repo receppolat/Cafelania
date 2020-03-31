@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +24,45 @@ namespace CafeRestorantOtomasyonu
         {
             if(TableForm.odeme)
                 axAcroPDF1.LoadFile(TableForm.receiptID.ToString()+".pdf");
+        }
+
+        private void btnGonder_Click(object sender, EventArgs e)
+        {
+            bool hata = false; 
+            try
+            {
+                MailMessage ePosta = new MailMessage();
+                ePosta.From = new MailAddress("receppolat95@gmail.com", "CAFELANIA");
+                hata = textBox1.Text.Contains("@gmail.com");
+                if (hata)
+                {
+                    ePosta.To.Add(new MailAddress(textBox1.Text));
+                    ePosta.Subject = DateTime.Now.ToString() + " tarihli fişiniz.";
+                    ePosta.Body = "Fişiniz ektedir. Doğayı sevip koruduğunuz için teşekkürler.";
+                    Attachment attachment = new Attachment(Application.StartupPath + @"\" + TableForm.receiptID + ".pdf");
+                    ePosta.Attachments.Add(attachment);
+                    string kullanici = "receppolat95@gmail.com";
+                    string parola = "Qazdrewq1";
+                    NetworkCredential nc = new NetworkCredential(kullanici, parola);
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Credentials = nc;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    object userState = ePosta;
+                    smtp.SendAsync(ePosta, (object)ePosta);
+                    MessageBox.Show("Mail Gönderildi.");
+                }
+                else
+                    MessageBox.Show("Mail doğru biçimde değildi.");
+               
+            }
+            catch(SmtpException ex)
+            {
+                MessageBox.Show(ex.Message, "Hata : E-Posta Gönderilemedi");
+            }
+
+
         }
     }
 }

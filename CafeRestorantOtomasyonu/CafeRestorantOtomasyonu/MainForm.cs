@@ -22,31 +22,49 @@ namespace CafeRestorantOtomasyonu
         public static int i= 0;
         private  void masaOlustur()
         {
-            for ( i = 1; i <= 10;i++)
+            int masaSayisi = 20;
+            using (var cafeContext = new CafeContext())
+            {
+                var result = from cafes in cafeContext.Cafe
+                             where cafes.CafeID == 1
+                             select cafes.TableCount;
+                foreach (var gez in result)
+                    masaSayisi = gez;
+            }
+            for ( i = 1; i <= masaSayisi; i++)
             {
                 Button masa = new Button();
                 masa.Name = i.ToString();
                 masa.Text = i.ToString();
                 masa.Size = new Size(50, 50);
-                masa.BackColor = Color.DarkGray;
+
+                using (var cafeContext = new CafeContext())
+                {
+                    var result = from receipts in cafeContext.Receipts
+                                 join orders in cafeContext.Orders
+                                 on receipts.TableNumber equals orders.TableNumber
+                                 where receipts.TableNumber == i && orders.isAlive == true
+                                 select receipts;
+                    if (result.Count() > 0)
+                    {
+                        foreach (var gez in result)
+                        {
+                            masa.BackColor = Color.DarkRed;
+                        }
+                    }
+                    else
+                        masa.BackColor = Color.Gray;
+                }
+
+
                 Panel panel = new Panel();
                 panel.Name = i.ToString() + "panel";
                 panel.Size = new Size(25, 50);
                 panel.BackColor = Color.Transparent;
-                if (masalar[i] == masa.Name)
-                {
-                    masa.BackColor = Color.Green;
-                    if (Masa == masa.Name)
-                    {
-                        masa.Enabled = false;
-                    }
-                    else
-                    {
-                        masa.Enabled = true;
-                    }
-                }
+
                 flowLayoutPanel1.Controls.Add(masa);
                 flowLayoutPanel1.Controls.Add(panel);
+
                 if (i % 16 == 0)
                 {
                     panel.Size = new Size(1350, 19);
@@ -81,16 +99,12 @@ namespace CafeRestorantOtomasyonu
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
-            if (Form1.adminGiris == 0)
+            if (giris.adminGiris == 0)
                 yoneticiIslemleri.Visible = false;
             else
                 yoneticiIslemleri.Visible = true;
             btncikis.Location = new Point(1500, 5);
-            Form2 gcs = new Form2();
-            gcs.Show();
             masaOlustur();
-            this.Show();            
         }
 
         private void ürünSilmeToolStripMenuItem_Click(object sender, EventArgs e)

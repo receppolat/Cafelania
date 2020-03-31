@@ -262,6 +262,7 @@ namespace CafeRestorantOtomasyonu
                 else
                     siparisEkleme(1);
                 adet = "";
+                kosullama(Color.DarkRed);
             }
 
         }
@@ -398,7 +399,34 @@ namespace CafeRestorantOtomasyonu
             }
         }
         public static bool odeme = false;
-        public static int receiptID = 0;
+        public static int receiptID = 1;
+
+        private void kosullama(Color color)
+        {
+            MainForm frm = null;
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f.Text == "Cafelania | Masalar")
+                {
+                    frm = (MainForm)f;
+                }
+            }
+            if (frm != null)
+            {
+                foreach (Control c in frm.flowLayoutPanel1.Controls)
+                {
+                    if (c is Button)
+                    {
+                        if (c.Text == MainForm.Masa.ToString())
+                        {
+                            c.BackColor = color;
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
 
         private void btnOdeme_Click(object sender, EventArgs e)
         {
@@ -421,6 +449,8 @@ namespace CafeRestorantOtomasyonu
                     order.isAlive = false;
                 }
                 cafeContext.SaveChanges();
+                kosullama(Color.Gray);
+
                 LoadingForm.kuver = "";
                 odeme = true;
                 this.Close();
@@ -432,15 +462,20 @@ namespace CafeRestorantOtomasyonu
 
         private void TableForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            using (var cafeContext = new CafeContext())
+
+            try
             {
-                int tableNumber = int.Parse(MainForm.Masa);
-                var result = from receipt in cafeContext.Receipts
-                             where receipt.TotalPrice == 0 && receipt.TableNumber == tableNumber
-                             select receipt;
-                cafeContext.Receipts.Remove(result.First());
-                cafeContext.SaveChanges();
+                using (var cafeContext = new CafeContext())
+                {
+                    int tableNumber = int.Parse(MainForm.Masa);
+                    var result = from receipt in cafeContext.Receipts
+                                 where receipt.TotalPrice == 0 && receipt.TableNumber == tableNumber
+                                 select receipt;
+                    cafeContext.Receipts.Remove(result.First());
+                    cafeContext.SaveChanges();
+                }
             }
+            catch { }
         }
     }
 }

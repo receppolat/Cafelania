@@ -82,6 +82,7 @@ namespace CafeRestorantOtomasyonu
             }
             catch
             {
+                MessageBox.Show("Böyle bir kayıt vardır.");
             }
         }
         string tc = "";
@@ -107,7 +108,7 @@ namespace CafeRestorantOtomasyonu
         {
             try
             {
-                tc =tbtc.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                tc = tbtc.Text = listView1.SelectedItems[0].SubItems[0].Text;
                 tbadi.Text = listView1.SelectedItems[0].SubItems[1].Text;
                 tbsoyadi.Text = listView1.SelectedItems[0].SubItems[2].Text;
                 textBox1.Text = listView1.SelectedItems[0].SubItems[3].Text;
@@ -126,17 +127,33 @@ namespace CafeRestorantOtomasyonu
                 {
                     if (tbadi.Text.Length != 0 && tbsoyadi.Text.Length != 0 && comboBox1.Text.Length != 0 && tbtc.Text.Length != 0 && textBox1.Text.Length != 0)
                     {
-                        btnekle_Click(sender,e);
-                        btnsil_Click(sender, e);
+                        using (var cafeContext = new CafeContext())
+                        {
+                            var result = from personals in cafeContext.Personals
+                                         where  personals.PersonelID.ToLower() == tbtc.Text.ToLower()
+                                         select personals;
+                            if(result.Count() == 0  || tc == tbtc.Text)
+                            {
+                                Personal personal = cafeContext.Personals.Find(tc);
+                                personal.PersonalName = tbadi.Text;
+                                personal.PersonalSurname = tbsoyadi.Text;
+                                personal.PersonalCell = textBox1.Text;
+                                personal.PersonalRank = comboBox1.Text;
+                                personal.PersonelID = tc;
+                                cafeContext.SaveChanges();
+                            }
+                            else
+                                MessageBox.Show("Böyle bir personel mevcuttur. Lütfen personel ismini değiştiriniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         verigoster();
                     }
                     else
                         MessageBox.Show("Boş alan bırakmayınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             catch
             {
+
             }
         }
 
@@ -183,6 +200,36 @@ namespace CafeRestorantOtomasyonu
                         Cafe cafe = cafeContext.Cafe.Find(1);
                         cafe.TableCount = int.Parse(tbmasa.Text);
                         cafeContext.SaveChanges();
+                        MessageBox.Show("Güncel masa miktarı için programı kapatıp yeniden açınız.", "Güncelleme Başarılı!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        tbmasa.Clear();
+                    }
+                }
+                else
+                    MessageBox.Show("Boş alan bırakmayınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch
+            {
+            }
+        }
+
+        private void btncafe_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbcparola.Text.Length != 0 && tbcadi.Text.Length != 0)
+                {
+                    using (var cafeContext = new CafeContext())
+                    {
+                        var result = from cafes in cafeContext.Cafe
+                                     where cafes.CafeID == 1
+                                     select cafes.CafeID;
+                        Cafe cafe = cafeContext.Cafe.Find(1);
+                        cafe.CafeEntry = tbcadi.Text;
+                        cafe.CafeLoginKey = tbcparola.Text;
+                        cafeContext.SaveChanges();
+                        MessageBox.Show("Güncelleme Başarılı!");
+                        tbcadi.Clear();
+                        tbcparola.Clear();
                     }
                 }
                 else

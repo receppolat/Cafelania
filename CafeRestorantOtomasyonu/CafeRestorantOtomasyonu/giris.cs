@@ -11,20 +11,16 @@ using System.Windows.Forms;
 
 namespace CafeRestorantOtomasyonu
 {
-    public partial class Form1 : Form
+    public partial class giris : Form
     {
-        public Form1()
+        public giris()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using(CafeContext cafeContext = new CafeContext())
-            {
-                var result = from product in cafeContext.Products
-                              select product;
-            }
+
         }
         public static int adminGiris = 0;
         private void button1_Click(object sender, EventArgs e)

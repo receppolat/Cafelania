@@ -1,6 +1,6 @@
 ﻿namespace CafeRestorantOtomasyonu
 {
-    partial class Form1
+    partial class giris
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(giris));
             this.label1 = new System.Windows.Forms.Label();
             this.tbadi = new System.Windows.Forms.TextBox();
             this.tbparola = new System.Windows.Forms.TextBox();
@@ -44,26 +44,30 @@
             this.label1.BackColor = System.Drawing.Color.Black;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(9, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(177, 17);
+            this.label1.Size = new System.Drawing.Size(137, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Cafelania | Sistem Giriş";
             // 
             // tbadi
             // 
             this.tbadi.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tbadi.Location = new System.Drawing.Point(146, 116);
+            this.tbadi.Location = new System.Drawing.Point(110, 94);
+            this.tbadi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbadi.Name = "tbadi";
-            this.tbadi.Size = new System.Drawing.Size(186, 22);
+            this.tbadi.Size = new System.Drawing.Size(140, 19);
             this.tbadi.TabIndex = 1;
             // 
             // tbparola
             // 
             this.tbparola.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tbparola.Location = new System.Drawing.Point(146, 181);
+            this.tbparola.Location = new System.Drawing.Point(110, 147);
+            this.tbparola.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbparola.Name = "tbparola";
-            this.tbparola.Size = new System.Drawing.Size(186, 22);
+            this.tbparola.PasswordChar = '*';
+            this.tbparola.Size = new System.Drawing.Size(140, 19);
             this.tbparola.TabIndex = 2;
             // 
             // label2
@@ -72,9 +76,10 @@
             this.label2.BackColor = System.Drawing.Color.Black;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(143, 96);
+            this.label2.Location = new System.Drawing.Point(107, 78);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 17);
+            this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Giriş Adı:";
             // 
@@ -84,9 +89,10 @@
             this.label3.BackColor = System.Drawing.Color.Black;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(143, 161);
+            this.label3.Location = new System.Drawing.Point(107, 131);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 17);
+            this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Giriş Parolası:";
             // 
@@ -95,9 +101,10 @@
             this.btngiris.BackColor = System.Drawing.Color.Black;
             this.btngiris.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btngiris.ForeColor = System.Drawing.Color.White;
-            this.btngiris.Location = new System.Drawing.Point(257, 209);
+            this.btngiris.Location = new System.Drawing.Point(193, 170);
+            this.btngiris.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btngiris.Name = "btngiris";
-            this.btngiris.Size = new System.Drawing.Size(75, 29);
+            this.btngiris.Size = new System.Drawing.Size(56, 24);
             this.btngiris.TabIndex = 5;
             this.btngiris.Text = "Giriş";
             this.btngiris.UseVisualStyleBackColor = false;
@@ -108,19 +115,20 @@
             this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(458, 12);
+            this.button1.Location = new System.Drawing.Point(344, 10);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 34);
+            this.button1.Size = new System.Drawing.Size(32, 28);
             this.button1.TabIndex = 8;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // Form1
+            // giris
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(513, 339);
+            this.ClientSize = new System.Drawing.Size(385, 275);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btngiris);
             this.Controls.Add(this.label3);
@@ -129,7 +137,8 @@
             this.Controls.Add(this.tbadi);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Name = "giris";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cafelania | Sistem Giriş";
             this.Load += new System.EventHandler(this.Form1_Load);

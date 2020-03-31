@@ -124,15 +124,19 @@ namespace CafeRestorantOtomasyonu
         {
             verigoster();
         }
-        int satir;
+        int satir = -1;
+        string turAdi = "";
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 satir = int.Parse(listView1.SelectedItems[0].SubItems[0].Text);
-                tbadi.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                turAdi = tbadi.Text = listView1.SelectedItems[0].SubItems[1].Text;
             }
-            catch { }
+            catch
+            {
+
+            }
         }
 
         private void btnduzenle_Click(object sender, EventArgs e)
@@ -148,14 +152,12 @@ namespace CafeRestorantOtomasyonu
                         using (var cafeContext = new CafeContext())
                         {
                             var resultCategory = from categories in cafeContext.Categories
-                                                 where categories.CategoryName.ToLower() == tbadi.Text.ToLower()
+                                                 where tbadi.Text.ToLower() == categories.CategoryName.ToLower()
                                                  select categories;
-                            if (resultCategory.Count() == 0)
+                            if (resultCategory.Count() == 0 || turAdi.ToLower() == tbadi.Text.ToLower())
                             {
-                                var result = from categoryId in cafeContext.Categories
-                                             select categoryId.CategoryID;
-                                int id = result.FirstOrDefault();
-                                Category category = cafeContext.Categories.Find(id);
+
+                                Category category = cafeContext.Categories.Find(satir);
                                 category.CategoryName = tbadi.Text;
                                 cafeContext.SaveChanges();
                             }
@@ -164,6 +166,8 @@ namespace CafeRestorantOtomasyonu
 
                         }
                         verigoster();
+                        tbadi.Clear();
+                        turAdi = "";
                     }
                     else
                         MessageBox.Show("Boş alan bırakmayınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -172,6 +176,35 @@ namespace CafeRestorantOtomasyonu
             }
             catch
             {
+
+            }
+        }
+
+        private void tbadi_TextChanged(object sender, EventArgs e)
+        {
+            using (var cafeContext1 = new CafeContext())
+            {
+                listView1.Items.Clear();
+                listView1.View = View.Details;
+                listView1.FullRowSelect = true;
+                listView1.GridLines = true;
+                using (var cafeContext = new CafeContext())
+                {
+                    var result2 = from categories in cafeContext.Categories
+                                  where categories.CategoryName.Contains(tbadi.Text)
+                                  select new
+                                  {
+                                      categories
+                                  };
+                    foreach (var categories in result2)
+                    {
+                        ListViewItem ekle = new ListViewItem();
+                        ekle.Text = categories.categories.CategoryID.ToString();
+                        ekle.SubItems.Add(categories.categories.CategoryName.ToString());
+                        listView1.Items.Add(ekle);
+                    }
+                }
+
             }
         }
     }
